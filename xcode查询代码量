@@ -1,0 +1,25 @@
+xcode查询代码量
+
+如果要统计ios开发代码，包括头文件的，终端命令进入项目目录下，命令如下
+
+find . -name "*.m" -or -name "*.h" -or -name "*.xib" -or -name "*.c" |xargs wc -l  
+列出每个文件的行数
+
+ 
+
+find . -name "*.m" -or -name "*.h" -or -name "*.xib" -or -name "*.c" |xargs grep -v "^$"|wc -l  
+列出代码行数总和
+
+ 
+
+grep -v "^$"是去掉空行
+注释也统计在代码量之内，毕竟也一个字一个字码出来的
+
+原文出处：
+http://blog.csdn.net/wide288/article/details/18180265
+
+ps：
+定位项目位置
+打开终端
+ls 
+ls 项目名称
