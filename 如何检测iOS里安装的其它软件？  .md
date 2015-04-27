@@ -2,6 +2,7 @@
 
   
   NSURL *instagramURL = [NSURL URLWithString:@"instagram://location?id=1"];
+ 
   BOOL hasInstagram = [[UIApplication sharedApplication] canOpenURL:instagramURL]; 
 
 http://www.cocoachina.com/bbs/read.php?tid=131788
