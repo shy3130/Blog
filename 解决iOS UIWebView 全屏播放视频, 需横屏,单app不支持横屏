@@ -1,1 +1,130 @@
-http://www.2cto.com/kf/201409/334148.html
+###解决iOS UIWebView 全屏播放视频, 需横屏,单app不支持横屏
+UIWebView中视频播放屏幕自动旋转，app不支持旋转但是某一个页面需要旋转等
+使用UIWebView播放视频时捕捉全屏播放事件
+iOS两个强制旋转屏幕的方法
+IOS：屏幕旋转与Transform
+
+在使用UIWebView播放视频的时候，想到视频应该能够旋转播放。但是app本身是不支持旋转的，所以把代码记录如下，引申出来的答案就是：所有的你想要进行页面自动旋转的页面都是可以用这种方法。不说太多的废话，代码如下：
+
+首先在appDelegate中进行代理的设置，这个方法系统在屏幕旋转等的时候会自动调用，不用太多的担心调用时机：
+
+//为视频的旋转做准备的
+
+	- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+
+	if(_isFull)
+
+	returnUIInterfaceOrientationMaskAll;
+
+	returnUIInterfaceOrientationMaskPortrait;
+
+	}
+
+
+上面的代码为：设置一个app的全局变量_isFull，在需要屏幕旋转的地方把全局变量进行改变并发送相应的通知（通知在下面），会自动调用上面的方法进行屏幕的旋转。
+
+`.h代码如下：`
+
+	@interface AppDelegate :UIResponder
+
+	{
+
+	BOOL _isFull; // 是否全屏
+
+	}
+
+
+	@property (nonatomic)BOOL isFull;
+
+上面已经将需要的变换代码设置好了，下面要做的就是使用通知在需要旋转屏幕的时候系统自动调用上面的代码：
+
+	[[NSNotificationCenterdefaultCenter]addObserver:selfselector:@selector(videoStarted:)name:@"UIMoviePlayerControllerDidEnterFullscreenNotification"object:nil];// 播放器即将播放通知
+
+
+	[[NSNotificationCenterdefaultCenter]addObserver:selfselector:@selector(videoFinished:)name:@"UIMoviePlayerControllerDidExitFullscreenNotification"object:nil];// 播放器即将退出通知
+
+
+上面发送了两个通知，分别为：UIMoviePlayerControllerDidEnterFullscreenNotification，UIMoviePlayerControllerWillExitFullscreenNotification，我使用的是这两个方法，有的网上说使用UIMoviePlayerControllerDidExitFullscreenNotification这个通知，但是我使用之后发现不行，应该使用WillExit这个通知。通知之后的代码如下：
+
+上面的方法执行完毕之后，会系统调用一开始在appDelegate里面写的方法，从而通过改变isFull的参数进行屏幕支持方向的改变。
+
+
+###pragma mark 调用视频的通知方法
+
+	- (void)videoStarted:(NSNotification *)notification {// 开始播放
+
+	AppDelegate * appDelegate = [[UIApplication sharedApplication] delegate];
+
+	appDelegate.isFull = YES;
+
+	}
+
+
+
+	- (void)videoFinished:(NSNotification *)notification {//完成播放
+
+	AppDelegate *appDelegate = [[UIApplicationsharedApplication] delegate];
+
+	appDelegate.isFull =NO;
+
+	if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+
+	SEL selector = NSSelectorFromString(@"setOrientation:");
+
+	NSInvocation *invocation = [NSInvocationinvocationWithMethodSignature:[UIDeviceinstanceMethodSignatureForSelector:selector]];
+
+	[invocationsetSelector:selector];
+
+	[invocationsetTarget:[UIDevicecurrentDevice]];
+
+	int val =UIInterfaceOrientationPortrait;
+
+	[invocationsetArgument:&val atIndex:2];
+
+	[invocationinvoke];
+
+	}
+
+	// NSLog(@"videoFinished %@", self.view.window.rootViewController.view);
+
+	//
+
+	// NSLog(@"a == %f", self.view.window.rootViewController.view.transform.a);
+
+	// NSLog(@"b == %f", self.view.window.rootViewController.view.transform.b);
+
+	// NSLog(@"c == %f", self.view.window.rootViewController.view.transform.c);
+
+	// NSLog(@"d == %f", self.view.window.rootViewController.view.transform.d);
+
+	// if (self.view.window.rootViewController.view.transform.c == 1 || self.view.window.rootViewController.view.transform.c == -1 ) {
+
+	// CGAffineTransform transform;
+
+	// //设置旋转度数
+
+	// // transform = CGAffineTransformRotate(self.view.window.rootViewController.view.transform, M_PI / 2);
+
+	// transform = CGAffineTransformIdentity;
+
+	// [UIView beginAnimations:@"rotate" context:nil ];
+
+	// [UIView setAnimationDuration:0.1];
+
+	// [UIView setAnimationDelegate:self];
+
+	// [self.view.window.rootViewController.view setTransform:transform];
+
+	// [UIView commitAnimations];
+
+	//
+
+	// self.view.window.rootViewController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height );
+
+	// }
+
+	//
+
+	// [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:NO];
+
+	}
