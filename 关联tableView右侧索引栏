@@ -1,0 +1,6 @@
+### 关联tableView右侧索引栏
+
+-(NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    return [self.indextitles indexOfObject:title];
+}
