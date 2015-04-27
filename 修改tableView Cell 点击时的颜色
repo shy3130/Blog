@@ -1,0 +1,38 @@
+修改tableView Cell 点击时的颜色
+
+
+首先清楚一点, 当我们点击cell的时候, 会默认是蓝色的效果
+@property(nonatomic,getter=isSelected) BOOL         selected;   // 是否被选中
+如果是YES, 选中cell的时候, cell会变成蓝色, 让用户知道被选中了
+如果是NO, 点击cell手指不离开, cell还是会显示蓝色, 当手指离开后, 蓝色消失
+有时候cell只是起到展示信息的作用,并没有跳转页面之类的, 显然如果将selected=NO还是有些不满意, 因为cell在点击的时候还是会有变化, 如何设置一下, 让用户点击cell一点反应都没有呢
+@property(nonatomic) UITableViewCellSelectionStyle  selectionStyle;           // default is UITableViewCellSelectionStyleBlue.
+看到这里, 我们笑了, 原来点击的那个蓝色效果就是这里出来的, 看看还有些其他可以选择的
+    UITableViewCellSelectionStyleNone,
+    UITableViewCellSelectionStyleBlue,  //default 
+    UITableViewCellSelectionStyleGray
+显然UITableViewCellSelectionStyleNone这个属性就是我们想要的了
+这个属性提供了2种颜色, 默认的蓝色和灰色, 但这远远不够, 所以我们需要自定义选中cell时的颜色
+
+@property(nonatomic,retain) UIView   *selectedBackgroundView;
+
+看看这个属性, 就知道是什么了
+
+cell.contentView.backgroundColor = [UIColor clearColor];
+UIView *aView = [[UIView alloc] initWithFrame:cell.contentView.frame];
+aView.backgroundColor = [UIColor redColor];
+
+self.selectedBackgroundView = aView;   设置选中后cell的背景颜色
+[aView release];<p>
+这里举例这是单纯的设置颜色,  其实可以有很多花样
+selectedBackgroundView是View类型, 我们可以用UIImageView也行, 在嵌套图片, 效果可以做的更好
+同理如何来设置cell的背景颜色呢(跟点击cell没有关系)
+需要说明一点的是:
+如果tableView是plain类型, 那么cell的背景颜色就是tableView的背景颜色, 就算设置了cell.backgroundColor貌似也没用
+如果tableView是group类型, cell的背景颜色跟tableView的背景无关, 需要单独在设置cell.backgroundColor
+@property(nonatomic,retain) UIView                *backgroundView;
+看这个属性就知道了, 至于如何设置跟上面相同
+
+
+
+
