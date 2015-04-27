@@ -5,12 +5,13 @@
 
 今天，闲来没事，想在模拟器上运行一下我的app。但是模拟器运行时，编译报错，
 
+`
 duplicate symbol _base64_encode in:
 
 .../libzbar.a(symbol.o)
 
 .../tencentOpenAPI(base64.o)
-
+`
 
 
 说的很清楚，就是这两个库中都定义了_base64_encode,所以编译器就会报错重复定义。
