@@ -63,5 +63,5 @@ PS：在网上找到很多这个方法都是将横坐标和纵坐标交叉，这
 	}
 
 
-zbar的使用＋为zbar添加阴影+扫描线
+##zbar的使用＋为zbar添加阴影+扫描线
 http://www.cnblogs.com/binglin92/p/3598753.html
