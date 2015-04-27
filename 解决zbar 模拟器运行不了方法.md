@@ -5,13 +5,12 @@
 
 今天，闲来没事，想在模拟器上运行一下我的app。但是模拟器运行时，编译报错，
 
-`
-duplicate symbol _base64_encode in:
 
-.../libzbar.a(symbol.o)
+	duplicate symbol _base64_encode in:
 
-.../tencentOpenAPI(base64.o)
-`
+	.../libzbar.a(symbol.o)
+
+	.../tencentOpenAPI(base64.o)
 
 
 说的很清楚，就是这两个库中都定义了_base64_encode,所以编译器就会报错重复定义。
@@ -27,11 +26,12 @@ duplicate symbol _base64_encode in:
 
 找到base64_encode这个方法，更改这个方法名，比如，我改成了base64_en，同时，找到调用这个方法的那一行代码，修改为base64_en。然后再分别在真机和模拟器下运行工程，找到这2个libzbar.a文件。至于是否合并为通用的.a。就看你自己了。
 合并的方法网上也很多了，非常简单。
-打开终端，输入命令   lipo -create XXX(路径名)/Release-iphoneos/libzbar.a XXX(路径名)/Release-iphonesimulator/libzbar.a  -output  XXX(输出的路径名)/libzbar.a 
-然后，导入这个libzbar.a，就可以在模拟器上运行项目了。
+打开终端，输入命令   
+	
+	lipo -create XXX(路径名)/Release-iphoneos/libzbar.a XXX(路径名)/Release-iphonesimulator/libzbar.a  -output  XXX(输出的路径名)/libzbar.a 
+然后，导入这个`libzbar.a`，就可以在模拟器上运行项目了。
 是不是很简单呢？呵呵。。。。
 当然，我感觉这是比较偷懒或者简便的方法。如果没有源码的话，就要用到那些个什么麻烦的要死的工具了。
 觉得不好，勿喷。和谐和谐。哈哈哈。。
 
 
-原文出自：http://www.cocoachina.com/bbs/read.php?tid=177828
