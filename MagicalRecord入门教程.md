@@ -10,9 +10,11 @@ Magical Record借用了Ruby on Rails中的Active Record模式，使得你可以�
 安装
 新建一个项目，注意在向导中不要勾选Core Data。
 下载Magical Record，并把MagicalRecord目录拖拽到工程中，记得勾选copy items into group folder。
-为项目添加CoreData FrameWork。(点击工程根节点，然后依次Targets > Build Phases > Link Binary With Libraries > + > CoreData.framework > Add)。
+为项目添加CoreData FrameWork。`(点击工程根节点，然后依次Targets > Build Phases > Link Binary With Libraries > + > CoreData.framework > Add)。`
 添加Magical Record的头文件到*-Prefix.pch：
+ 
  #import "CoreData+MagicalRecord.h"
+ 
 创建模型文件
 下面创建一个名为Person的模型，有age、firstname、lastname三个字段。
 
@@ -24,16 +26,16 @@ Magical Record借用了Ruby on Rails中的Active Record模式，使得你可以�
 初始化Magical Record
 首先在AppDelegate.m中添加以下代码对Magical Record进行初始化：
 *
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    [MagicalRecord setupCoreDataStackWithStoreNamed:@"MyDatabase.sqlite"];
-    // ...
-    return YES;
-}
-- (void)applicationWillTerminate:(NSNotification *)aNotification
-{
-    [MagicalRecord cleanUp];
-}
+ - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+ {
+  [MagicalRecord setupCoreDataStackWithStoreNamed:@"MyDatabase.sqlite"];
+  // ...
+  return YES;
+  }
+  -(void)applicationWillTerminate:(NSNotification *)aNotification
+  {
+  [MagicalRecord cleanUp];
+  }
 *
 是否比Core Data默认的初始化简洁多了呢？
 
@@ -41,36 +43,36 @@ Magical Record借用了Ruby on Rails中的Active Record模式，使得你可以�
 使用Person的MR_findAll、MR_findAllSortedBy、MR_findByAttribute等方法可以查询Person：
 
 //查找数据库中的所有Person。
-NSArray *persons = [Person MR_findAll];
+  NSArray *persons = [Person MR_findAll];
 //查找所有的Person并按照first name排序。
-NSArray *personsSorted = [Person MR_findAllSortedBy:@"firstname" ascending:YES];
+  NSArray *personsSorted = [Person MR_findAllSortedBy:@"firstname" ascending:YES];
 //查找所有age属性为25的Person记录。
-NSArray *personsAgeEuqals25   = [Person MR_findByAttribute:@"age" withValue:[NSNumber numberWithInt:25]];
+  NSArray *personsAgeEuqals25   = [Person MR_findByAttribute:@"age" withValue:[NSNumber numberWithInt:25]];
 //查找数据库中的第一条记录
-Person *person = [Person MR_findFirst];
+ Person *person = [Person MR_findFirst];
 添加记录
-使用Person的MR_createEntity方法可以方便的创建一个Person，需要使用[[NSManagedObjectContext MR_defaultContext] MR_save]来进行保存哦：
+使用Person的MR_createEntity方法可以方便的创建一个Person，需要使用`[[NSManagedObjectContext MR_defaultContext] MR_save]`来进行保存哦：
 
-Person *person = [Person MR_createEntity];
-person.firstname = @"Frank";
-person.lastname = @"Zhang";
-person.age = @26;//此处使用了LLVM的新特性，XCode 4.4可用
-[[NSManagedObjectContext MR_defaultContext] MR_save];
+  Person *person = [Person MR_createEntity];
+  person.firstname = @"Frank";
+  person.lastname = @"Zhang";
+  person.age = @26;//此处使用了LLVM的新特性，XCode 4.4可用
+  [[NSManagedObjectContext MR_defaultContext] MR_save];
 更新记录
 直接对数据库中查找到的Person进行赋值，然后使用NSManagedObjectContext保存即可更新Person：
 
-Person *person = ...;//此处略
-person.lastname = object;        
-[[NSManagedObjectContext MR_defaultContext] MR_save];
+  Person *person = ...;//此处略
+  person.lastname = object;        
+  [[NSManagedObjectContext MR_defaultContext] MR_save];
 删除记录
 使用Person的MR_deleteEntity可以方便的删除Person，模式和添加更新一致：
 
-Person *person = ...;//此处略
-[person MR_deleteEntity];
-[[NSManagedObjectContext MR_defaultContext] MR_save];
+  Person *person = ...;//此处略
+  [person MR_deleteEntity];
+  [[NSManagedObjectContext MR_defaultContext] MR_save];
 小技巧
-启动时MR_mergedObjectModelFromMainBundle方法报错
-Core Data的模型有版本的概念，有可能在你Magical Record第一次初始化完成以后，你又更改了模型文件，导致Core Data去合并模型报错。解决办法很简单，点击菜单中的Project->Clean即可。
+启动时`MR_mergedObjectModelFromMainBundle`方法报错
+Core Data的模型有版本的概念，有可能在你Magical Record第一次初始化完成以后，你又更改了模型文件，导致Core Data去合并模型报错。解决办法很简单，点击菜单中的`Project->Clean`即可。
 
 项目使用ARC后，编译Magical Record不通过
 点击项目 -> Build Phases -> Compile Sources中, 双击报错的class文件, 编辑Compiler Flags加入 -fno-objc-arc。
