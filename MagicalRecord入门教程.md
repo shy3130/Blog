@@ -21,12 +21,12 @@ Magical Record借用了Ruby on Rails中的Active Record模式，使得你可以�
 使用Magical Record 初始化Magical Record 首先在AppDelegate.m中添加以下代码对Magical Record进行初始化： *
 
 	-(void)applicationDidFinishLaunching:(NSNotification *)aNotification { 
-	[MagicalRecord setupCoreDataStackWithStoreNamed:@"MyDatabase.sqlite"]; 
+		[MagicalRecord setupCoreDataStackWithStoreNamed:@"MyDatabase.sqlite"]; 
 	// ...
-	 return YES; 
+		 return YES; 
 	} 
 	-(void)applicationWillTerminate:(NSNotification *)aNotification { 
-	[MagicalRecord cleanUp]; 
+		[MagicalRecord cleanUp]; 
 	}
 	
 
