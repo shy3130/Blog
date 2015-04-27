@@ -18,11 +18,11 @@ duplicate symbol _base64_encode in:
 于是，只有一个办法了，去寻找源码，但是腾讯这种sdk，肯定是不会给源码的，只有去找libzbar的源码了。
 先去下载zbar的源码     http://zbar.sourceforge.net/download.html
 
-如图1，打开工程
+1，打开工程
 
-如图2，找到symbol.c
+2，找到symbol.c
 
-如图3 找到base64_encode这个方法
+3 找到base64_encode这个方法
 
 找到base64_encode这个方法，更改这个方法名，比如，我改成了base64_en，同时，找到调用这个方法的那一行代码，修改为base64_en。然后再分别在真机和模拟器下运行工程，找到这2个libzbar.a文件。至于是否合并为通用的.a。就看你自己了。
 合并的方法网上也很多了，非常简单。
@@ -32,5 +32,5 @@ duplicate symbol _base64_encode in:
 当然，我感觉这是比较偷懒或者简便的方法。如果没有源码的话，就要用到那些个什么麻烦的要死的工具了。
 觉得不好，勿喷。和谐和谐。哈哈哈。。
 
-如果如片加载不出来请参考原文
+
 原文出自：http://www.cocoachina.com/bbs/read.php?tid=177828
