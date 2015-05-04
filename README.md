@@ -62,3 +62,5 @@
 [解决zbar 模拟器运行不了方法](https://github.com/wangshuai443130/Blog/blob/gh-pages/%E8%A7%A3%E5%86%B3zbar%20%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8C%E4%B8%8D%E4%BA%86%E6%96%B9%E6%B3%95.md)
 
 [AppStore加急通道](https://github.com/wangshuai443130/Blog/blob/gh-pages/AppStore%E5%8A%A0%E6%80%A5%E9%80%9A%E9%81%93.md "Title") 
+
+[UIView转化成UIImage](https://github.com/wangshuai443130/Blog/blob/gh-pages/UIView%E8%BD%AC%E5%8C%96%E6%88%90UIImage.md)
