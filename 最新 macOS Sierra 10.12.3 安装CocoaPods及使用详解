@@ -1,43 +1,43 @@
 
 最新 macOS Sierra 10.12.3 安装CocoaPods及使用详解
 
-一、什么是CocoaPods
+####一、什么是CocoaPods
 每种语言发展到一个阶段，就会出现相应的依赖管理工具，例如 Java 语言的 Maven，nodejs 的 npm。随着 iOS 开发者的增多，业界也出现了为 iOS 程序提供依赖管理的工具，它的名字叫做：CocoaPods。
 
 CocoaPods项目的源码 在 Github 上管理。该项目开始于 2011 年 8 月 12 日，经过多年发展，现在已经成为 iOS 开发事实上的依赖管理标准工具。开发 iOS 项目不可避免地要使用第三方开源库，CocoaPods 的出现使得我们可以节省设置和更新第三方开源库的时间。
 
-二、为什么要使用CocoaPods
+####二、为什么要使用CocoaPods
 在使用CocoaPods之前，开发项目需要用到第三方开源库的时候，我们需要
 
-1.把开源库的源代码复制到项目中
+##1.把开源库的源代码复制到项目中
 
-2.添加一些依赖框架和动态库
+##2.添加一些依赖框架和动态库
 
-3.设置-ObjC，-fno-objc-arc等参数
+##3.设置  -ObjC，-fno-objc-arc 等参数
 
-4.管理他们的更新
+##4.管理他们的更新
 
-在使用CocoaPods后，我们只需要把用到的开源库放到一个名为Podfile的文件中，然后执行pod install就可以了，Cocoapods就会自动将这些第三方开源库的源码下载下来，并且为我们的工程设置好响应的系统依赖和编译参数。
+在使用CocoaPods后，我们只需要把用到的开源库放到一个名为Podfile的文件中，然后执行  pod install就可以了，Cocoapods就会自动将这些第三方开源库的源码下载下来，并且为我们的工程设置好响应的系统依赖和编译参数。
 
-三、CocoaPods的原理
+####三、CocoaPods的原理
 CocoaPods的原理是将所有的依赖库都放到另一个名为Pods的项目中，然后让主项目依赖Pods项目，这样，源码管理工作都从主项目移到了Pods项目中。Pods项目最终会编译成一个名为libPods.a的文件，主项目只需要依赖这个.a文件即可。
 
-四、CocoaPods的安装
+####四、CocoaPods的安装
 CocoaPods可以方便地通过Mac自带的RubyGems安装。
 
 打开Terminal（Mac电脑自带的终端），然后按照以下提示操作即可：
 
-1.设置ruby的软件源
+##1.设置ruby的软件源
 
 这是因为ruby的软件源rubygems.org因为使用亚马逊的云服务，被我天朝屏蔽了，需要更新一下ruby的源，过程如下：
 
-gem sources -l #(查看当前ruby的源)
+  gem sources -l #(查看当前ruby的源)
 
-gem sources --remove https://rubygems.org/ #(移除当前ruby的源)
+  gem sources --remove https://rubygems.org/ #(移除当前ruby的源)
 
-gem sources -a https://ruby.taobao.org/ #(设置当前ruby的源为我天朝的)
+  gem sources -a https://ruby.taobao.org/ #(设置当前ruby的源为我天朝的)
 
-gem sources -l #(再次查看当前ruby的源)
+  gem sources -l #(再次查看当前ruby的源)
 
 如果Terminal输出：
 
