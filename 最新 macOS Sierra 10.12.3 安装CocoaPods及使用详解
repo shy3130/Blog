@@ -1,6 +1,5 @@
 最新 macOS Sierra 10.12.3 安装CocoaPods及使用详解
 
-# 123
 ## 一、什么是CocoaPods
 每种语言发展到一个阶段，就会出现相应的依赖管理工具，例如 Java 语言的 Maven，nodejs 的 npm。随着 iOS 开发者的增多，业界也出现了为 iOS 程序提供依赖管理的工具，它的名字叫做：CocoaPods。
 
