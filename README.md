@@ -64,3 +64,5 @@
 [AppStore加急通道](https://github.com/wangshuai443130/Blog/blob/gh-pages/AppStore%E5%8A%A0%E6%80%A5%E9%80%9A%E9%81%93.md "Title") 
 
 [UIView转化成UIImage](https://github.com/wangshuai443130/Blog/blob/gh-pages/UIView%E8%BD%AC%E5%8C%96%E6%88%90UIImage.md)
+
+[最新 macOS Sierra 10.12.3 安装CocoaPods及使用详解](Blog/最新 macOS Sierra 10.12.3 安装CocoaPods及使用详解.md)
