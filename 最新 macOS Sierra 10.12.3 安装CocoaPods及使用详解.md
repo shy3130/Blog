@@ -112,8 +112,8 @@ Podfile文件内容的格式应该如下：
 
 这样，AFNetworking和SDWebImage就已经下载完成并且设置好了编译参数和依赖，以后使用的时候切记如下两点：
 
-##### 1.从此以后需要使用Cocoapods生成的<font color=Crimson size=3> .xcworkspace</font>文件来打开工程，而不是使用以前的.xcodeproj文件
-##### 2.每次更改了Podfile文件，都需要重新执行一次 <font color=Crimson size=3>pod update</font> 更新命令:
+##### 1.从此以后需要使用Cocoapods生成的 .xcworkspace文件来打开工程，而不是使用以前的.xcodeproj文件
+##### 2.每次更改了Podfile文件，都需要重新执行一次 pod update 更新命令:
 
 
 	pod update
