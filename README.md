@@ -65,6 +65,4 @@
 
 [UIView转化成UIImage](https://github.com/wangshuai443130/Blog/blob/gh-pages/UIView%E8%BD%AC%E5%8C%96%E6%88%90UIImage.md)
 
-[最新 macOS Sierra 10.12.3 安装CocoaPods及使用详解](https://github.com/wangshuai443130/Blog/blob/gh-pages/最新 macOS Sierra 10.12.3 安装CocoaPods及使用详解.md)
-
-
+[最新 macOS Sierra 10.12.3 安装CocoaPods及使用详解](https://github.com/wangshuai443130/Blog/blob/gh-pages/%E6%9C%80%E6%96%B0%20macOS%20Sierra%2010.12.3%20%E5%AE%89%E8%A3%85CocoaPods%E5%8F%8A%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3.md)
